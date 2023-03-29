@@ -13,14 +13,17 @@ export default function CommandLineItem(props: any) {
       password: password,
       username: username,
     };
-    fetch(`http://localhost:4201/${userAlreadyExists ? "login" : "signup"}`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "Access-Control-Allow-Origin": "*",
-      },
-      body: JSON.stringify(data),
-    })
+    fetch(
+      `https://api.csclub.social/${userAlreadyExists ? "login" : "signup"}`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Access-Control-Allow-Origin": "*",
+        },
+        body: JSON.stringify(data),
+      }
+    )
       .then((r) => r.json())
       .then((r2) => {
         if (
@@ -41,7 +44,7 @@ export default function CommandLineItem(props: any) {
     var data = {
       username: username,
     };
-    await fetch("http://localhost:4201/get-username-status", {
+    await fetch("https://api.csclub.social/get-username-status", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

@@ -422,6 +422,8 @@ a {
 a:hover {
   text-decoration: underline;
 }
-.post a {
+.post a,
+.post img {
+  max-height: 25em;
   min-width: 100%;
 }

@@ -51,7 +51,7 @@ export default function HomePage() {
       username: localStorage.getItem("username"),
       card_id: card_id,
     };
-    fetch("http://localhost:4201/delete-card", {
+    fetch("https://api.csclub.social/delete-card", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -63,12 +63,12 @@ export default function HomePage() {
     });
   }
   useEffect(() => {
-    fetch("http://localhost:4201/get-blog-posts")
+    fetch("https://api.csclub.social/get-blog-posts")
       .then((r) => r.json())
       .then((r) => {
         setBlogData([...r]);
       });
-    fetch("http://localhost:4201/get-cards")
+    fetch("https://api.csclub.social/get-cards")
       .then((r) => r.json())
       .then((r2) => {
         setCardData([...r2]);
@@ -79,7 +79,7 @@ export default function HomePage() {
       token: localStorage.getItem("token"),
       username: localStorage.getItem("username"),
     };
-    fetch("http://localhost:4201/validate-token", {
+    fetch("https://api.csclub.social/validate-token", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -358,7 +358,7 @@ export default function HomePage() {
                           token: localStorage.getItem("token"),
                           username: localStorage.getItem("username"),
                         };
-                        fetch("http://localhost:4201/delete-blog-post", {
+                        fetch("https://api.csclub.social/delete-blog-post", {
                           method: "POST",
                           headers: {
                             "Content-Type": "application/json",
