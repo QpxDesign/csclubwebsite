@@ -319,26 +319,78 @@ export default function HomePage() {
           >
             {blogData.map((item: any) => {
               return (
-                <Link to={"/blog/post/" + item.post_id}>
-                  <div className="post">
+                <div className="post">
+                  <Link to={"/blog/post/" + item.post_id}>
+                    {" "}
                     <img src={item.image_slug} />
+                  </Link>
+                  <Link to={"/blog/post/" + item.post_id}>
                     <h1>{item.title}</h1>
-                    <h2>{item.blurb}</h2>
-                    <div
-                      style={{
-                        width: "90%",
-                        display: "flex",
-                        justifyContent: "space-between",
-                        paddingBottom: "1em",
-                        marginTop: ".5em",
-                        fontStyle: "italic",
+                  </Link>
+                  <h2>{item.blurb}</h2>
+                  <div
+                    style={{
+                      width: "90%",
+                      display: "flex",
+                      justifyContent: "space-between",
+                      paddingBottom: "1em",
+                      marginTop: ".5em",
+                      fontStyle: "italic",
+                    }}
+                  >
+                    <h3>{item.author}</h3>
+                    <h3>{FormatTime(item.timestamp)}</h3>
+                  </div>{" "}
+                  <div
+                    style={{
+                      display: "flex",
+                      justifyContent: "flex-start",
+                      marginLeft: "3em",
+                      paddingBottom: ".5em",
+                      gap: "1em",
+                      width: "100%",
+                    }}
+                  >
+                    <AiFillDelete
+                      onClick={() => {
+                        var data = {
+                          post_id: item.post_id,
+                          token: localStorage.getItem("token"),
+                          username: localStorage.getItem("username"),
+                        };
+                        fetch("http://localhost:4201/delete-blog-post", {
+                          method: "POST",
+                          headers: {
+                            "Content-Type": "application/json",
+                            "Access-Control-Allow-Origin": "*",
+                          },
+                          body: JSON.stringify(data),
+                        }).then((r) => {
+                          window.location.reload();
+                        });
                       }}
-                    >
-                      <h3>{item.author}</h3>
-                      <h3>{FormatTime(item.timestamp)}</h3>
-                    </div>
+                      className={authed ? "" : "hidden"}
+                      style={{
+                        fontSize: "2em",
+                        color: "red",
+                        cursor: "pointer",
+                      }}
+                    />{" "}
+                    <AiTwotoneEdit
+                      className={authed ? "" : "hidden"}
+                      onClick={() => {
+                        setActiveEditID(item.post_id);
+                        enablePopup();
+                        setShowCardEditor(true);
+                      }}
+                      style={{
+                        fontSize: "2em",
+                        color: "black",
+                        cursor: "pointer",
+                      }}
+                    />
                   </div>
-                </Link>
+                </div>
               );
             })}
           </div>

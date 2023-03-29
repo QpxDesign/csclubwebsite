@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import { FormatTime } from "../helpers/FormatTime";
+import { BsArrowLeft } from "react-icons/bs";
 
 export default function BlogPost() {
   const { id } = useParams();
@@ -28,10 +29,23 @@ export default function BlogPost() {
 
   useEffect(() => {
     FetchPosts();
+    var a: any = document.querySelector("body");
+    a.style.background = "black";
   }, []);
 
   return (
     <div className="" style={{ backgroundColor: "black" }}>
+      <Link to="/">
+        <BsArrowLeft
+          style={{
+            color: "white",
+            fontSize: "2.5em",
+            marginLeft: ".5em",
+            marginTop: ".5em",
+          }}
+          role="link"
+        />
+      </Link>
       {postData !== undefined ? (
         <div className="post-page-wrapper">
           <h1>{postData.title}</h1>

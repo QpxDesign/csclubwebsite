@@ -336,10 +336,11 @@ li {
   color: black;
   border-radius: 2em;
   width: 90%;
-  max-width: 50em;
+  max-width: 45em;
 }
 .post img {
-  object-fit: contain;
+  object-fit: cover;
+  min-width: 100%;
   width: 100%;
   border-radius: 2em 2em 0 0;
 }
@@ -358,20 +359,20 @@ li {
   font-size: 1.33em;
 }
 .post-page-wrapper {
+  color: white;
   display: flex;
   align-items: center;
   flex-direction: column;
   margin: 0 auto;
-  background-color: var(--backgroundcolor);
 }
 .post-page-wrapper h1,
 .post-page-wrapper h2,
 .post-page-wrapper p {
-  color: var(--headerbackgroundtext) !important;
   width: min(90%, 70em) !important;
   max-width: 100% !important;
   overflow-x: hidden !important;
   padding: 0 !important;
+  margin: 0;
   font-family: "Source Serif Pro", serif !important;
 }
 .post-page-wrapper h1 {
@@ -386,18 +387,18 @@ li {
   margin-bottom: 0.75em;
 }
 .post-page-wrapper img {
-  object-fit: contain;
-  width: 100%;
+  object-fit: cover;
   max-width: min(90%, 50em);
   border-radius: 2em;
-  border: 3px solid var(--textcolor) !important;
+  border: 3px solid white !important;
+  margin-bottom: 1em;
 }
 .post-page-wrapper p {
-  font-size: 1.2em;
+  font-size: 1.25em;
   margin: 0 auto;
-  margin-top: 1em;
-  text-indent: 2em;
+  text-indent: 1em;
   line-height: 1.5em;
+  max-width: 50em !important;
 }
 .post-page-wrapper .content-wrapper {
   margin: 0 auto;
@@ -412,4 +413,15 @@ li {
 }
 .post-page-wrapper ul {
   margin: 0 auto;
+}
+a {
+  text-decoration: inherit;
+  color: inherit;
+  max-width: fit-content;
+}
+a:hover {
+  text-decoration: underline;
+}
+.post a {
+  min-width: 100%;
 }
