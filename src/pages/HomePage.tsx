@@ -5,6 +5,7 @@ import uuid from "react-uuid";
 import PostEditor from "../components/PostEditor";
 import { FormatTime } from "../helpers/FormatTime";
 import { Link } from "react-router-dom";
+import Deploy from "../sections/Deploy";
 
 import {
   AiOutlineClose,
@@ -230,7 +231,7 @@ export default function HomePage() {
           </div>
           <div
             style={{
-              borderLeft: "4px solid white",
+              borderLeft: "3px solid white",
               height: "2em",
             }}
           ></div>
@@ -242,6 +243,20 @@ export default function HomePage() {
             className={viewmode === "Cool Stuff" ? "option active" : "option"}
           >
             Cool Stuff
+          </div>
+          <div
+            style={{
+              borderLeft: "3px solid white",
+              height: "2em",
+            }}
+          ></div>
+          <div
+            onClick={() => {
+              setViewmode("Deploy");
+            }}
+            className={viewmode === "Deploy" ? "option active" : "option"}
+          >
+            Deploy
           </div>
         </div>
 
@@ -305,7 +320,7 @@ export default function HomePage() {
               );
             })}{" "}
           </div>
-        ) : (
+        ) : viewmode === "Cool Stuff" ? (
           <div
             style={{
               display: "flex",
@@ -394,9 +409,11 @@ export default function HomePage() {
               );
             })}
           </div>
-        )}
+        ) : viewmode === "Deploy" ? (
+          <Deploy />
+        ) : null}
 
-        <h5 style={{ fontSize: "2em" }}>version 0.17</h5>
+        <h5 style={{ fontSize: "1.25em" }}>version 0.17</h5>
       </section>
     </>
   );
