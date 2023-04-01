@@ -19,7 +19,7 @@ export default function Deploy() {
     var data = {
       username: localStorage.getItem("username"),
     };
-    fetch("http://localhost:4201/get-user-sites", {
+    fetch("https://api.csclub.social/get-user-sites", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
