@@ -144,7 +144,7 @@ export default function Deploy() {
                 }}
               >
                 <AiFillDelete
-                  style={{ fontSize: "1.8em", color: "red" }}
+                  style={{ fontSize: "1.8em", color: "red", cursor: "pointer" }}
                   onClick={() => {
                     var data = {
                       token: localStorage.getItem("token"),
@@ -152,6 +152,7 @@ export default function Deploy() {
                       github_link: item.github_link,
                       domain_name: item.domain_name,
                     };
+                    console.log(data);
                     fetch("https://api.csclub.social/delete-site", {
                       method: "POST",
                       headers: {
@@ -159,7 +160,12 @@ export default function Deploy() {
                         "Access-Control-Allow-Origin": "*",
                       },
                       body: JSON.stringify(data),
-                    });
+                    })
+                      .then((r) => r.json())
+                      .then((r) => {
+                        console.log(r);
+                        window.location.reload();
+                      });
                   }}
                 />
                 <GrUpdate
@@ -167,6 +173,8 @@ export default function Deploy() {
                     fontSize: "1.5em",
                     marginLeft: ".5em",
                     color: "white",
+                    cursor: "pointer",
+                    animation: "rotate-forever infinite 1s",
                   }}
                   onClick={() => {
                     var data = {
@@ -175,6 +183,7 @@ export default function Deploy() {
                       github_link: item.github_link,
                       domain_name: item.domain_name,
                     };
+                    console.log(data);
                     fetch("https://api.csclub.social/update-site", {
                       method: "POST",
                       headers: {
@@ -182,7 +191,12 @@ export default function Deploy() {
                         "Access-Control-Allow-Origin": "*",
                       },
                       body: JSON.stringify(data),
-                    });
+                    })
+                      .then((r) => r.json())
+                      .then((r) => {
+                        console.log(r);
+                        window.location.reload();
+                      });
                   }}
                 />
               </div>
@@ -204,7 +218,7 @@ export default function Deploy() {
       >
         {" "}
         Website Deployed. Find it at{" "}
-        <a href={res.domain_name.split("_")[0]}>
+        <a href={"http://" + res.domain_name.split("_")[0]}>
           {res.domain_name.split("_")[0]}{" "}
         </a>
       </h1>
