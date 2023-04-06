@@ -183,7 +183,7 @@ export default function HomePage() {
       <section>
         <header>
           <h1>cs_club</h1>
-          <h2>meetings every friday at 12:10pm in the CS Lab</h2>
+          <h2>meetings every friday at 11:50am in the CS Lab</h2>
           <h3>
             <BsFillPersonFill />
             {localStorage.getItem("username")}
@@ -191,12 +191,11 @@ export default function HomePage() {
           </h3>
         </header>
         <AiFillPlusCircle
-          className={authed ? "new-post-button" : "hidden"}
+          className={authed && viewmode !== "Deploy"  ? "new-post-button" : "hidden"}
           role="button"
           onClick={() => {
             enablePopup();
             setCreateMode(true);
-
             setActiveEditID("");
             setShowCardEditor(true);
           }}
@@ -215,7 +214,7 @@ export default function HomePage() {
         <div
           className="view-selector hstack"
           style={{
-            width: "100%",
+            width: "95%",
             justifyContent: "center",
           }}
         >

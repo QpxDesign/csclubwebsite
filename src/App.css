@@ -316,6 +316,7 @@ li {
 .view-selector .option {
   font-size: 1.25em;
   cursor: pointer;
+  text-align: center;
 }
 .view-selector {
   margin-top: 1em;
@@ -328,21 +329,22 @@ li {
   border-radius: 1em;
 }
 .post {
+  font-size: .9em;
   background-color: white;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   color: black;
-  border-radius: 2em;
   width: 90%;
   max-width: 45em;
+  position: relative;
 }
 .post img {
+  height: 20em;
   object-fit: cover;
   min-width: 100%;
   width: 100%;
-  border-radius: 2em 2em 0 0;
 }
 .post h1 {
   font-size: 2.25em;

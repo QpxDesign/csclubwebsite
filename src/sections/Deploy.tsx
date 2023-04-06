@@ -15,7 +15,8 @@ export default function Deploy() {
   const [res, setRes]: any = useState({});
   const [userSites, setUserSites]: any = useState([]);
   const [error, setError] = useState(false);
-  useEffect(() => {
+  const [doneUpdating, setDoneUpdating] = useState(false)
+  function getSites() {
     var data = {
       username: localStorage.getItem("username"),
     };
@@ -33,6 +34,9 @@ export default function Deploy() {
         setUserSites([...r2]);
       });
     console.log(data);
+  }
+  useEffect(() => {
+    getSites()
   }, []);
   return !loaded ? (
     <>
@@ -82,6 +86,7 @@ export default function Deploy() {
                 .then((r: any) => {
                   setRes(r);
                   setError(r.error);
+
                   setLoaded(true);
                   console.log(r);
                 });
@@ -174,9 +179,10 @@ export default function Deploy() {
                     marginLeft: ".5em",
                     color: "white",
                     cursor: "pointer",
-                    animation: "rotate-forever infinite 1s",
+                    animation: !doneUpdating ? "rotate-forever infinite 1s1" : "",
                   }}
                   onClick={() => {
+                    setDoneUpdating(false)
                     var data = {
                       token: localStorage.getItem("token"),
                       username: localStorage.getItem("username"),
@@ -195,7 +201,13 @@ export default function Deploy() {
                       .then((r) => r.json())
                       .then((r) => {
                         console.log(r);
-                        window.location.reload();
+                        setDoneUpdating(true)
+                        if (!r.error) {
+                         
+                          getSites()
+                        } else {
+                          alert(r.msg)
+                        }
                       });
                   }}
                 />

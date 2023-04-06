@@ -132,7 +132,7 @@ export default function PostEditor(props: PostEditorProps) {
             };
             fetch(
               `https://api.csclub.social/${
-                props.inCreateMode ? "add-card" : "update-card"
+                props.inCreateMode ? "add-card" : "update-cards"
               }`,
               {
                 method: "POST",
