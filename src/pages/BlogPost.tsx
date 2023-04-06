@@ -54,9 +54,14 @@ export default function BlogPost() {
           </h2>
           <img src={postData.image_slug} />
           <p
-            dangerouslySetInnerHTML={{ __html: postData.contents_html }}
+          
             className="content-wrapper"
-          ></p>
+          >
+             {postData.contents_html !== undefined ? postData.contents_html.split("\n").map((item : any, index : any) => {
+              return item.length !== 0 ? 
+                 <p style={{marginBottom:"1em"}}>{item}</p> : ""
+              }) : ""}
+          </p>
         </div>
       ) : (
         "Error"
