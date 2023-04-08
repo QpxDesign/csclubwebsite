@@ -68,7 +68,11 @@ export default function HomePage() {
     fetch("https://api.csclub.social/get-blog-posts")
       .then((r) => r.json())
       .then((r) => {
-        setBlogData([...r]);
+        var byDate = r.slice(0);
+        byDate.sort(function (a: any, b: any) {
+          return b.timestamp - a.timestamp;
+        });
+        setBlogData(byDate);
       });
     fetch("https://api.csclub.social/get-cards")
       .then((r) => r.json())
