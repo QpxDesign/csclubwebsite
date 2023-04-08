@@ -91,6 +91,7 @@ export default function HomePage() {
     })
       .then((r) => r.json())
       .then((r2) => {
+        console.log(r2);
         setAuthedHigh(r2.authStatus === "high");
         setAuthedMed(r2.authStatus === "med");
       });
