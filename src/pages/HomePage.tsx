@@ -90,9 +90,7 @@ export default function HomePage() {
     })
       .then((r) => r.json())
       .then((r2) => {
-        if (r2.auth) {
-          setAuthed(true);
-        }
+        setAuthed(r2.auth);
       });
   }, []);
   useEffect(() => {
@@ -191,7 +189,9 @@ export default function HomePage() {
           </h3>
         </header>
         <AiFillPlusCircle
-          className={authed && viewmode !== "Deploy"  ? "new-post-button" : "hidden"}
+          className={
+            authed && viewmode !== "Deploy" ? "new-post-button" : "hidden"
+          }
           role="button"
           onClick={() => {
             enablePopup();

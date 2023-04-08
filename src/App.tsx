@@ -1,6 +1,7 @@
 import "./App.css";
 import HomePage from "./pages/HomePage";
 import BlogPost from "./pages/BlogPost";
+import SignInWithGoogle from "./pages/SignInWithGoogle";
 import {
   BrowserRouter as Router,
   Routes, //replaces "Switch" used till v5

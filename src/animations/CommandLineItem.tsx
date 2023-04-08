@@ -1,5 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { AiFillCheckCircle } from "react-icons/ai";
+import { GoogleLogin, GoogleOAuthProvider } from "@react-oauth/google";
+import SignInWithGoogle from "../pages/SignInWithGoogle";
 
 export default function CommandLineItem(props: any) {
   const textInput = React.useRef<HTMLInputElement>(null);
@@ -88,6 +90,10 @@ export default function CommandLineItem(props: any) {
         >
           {"next ==>"}
         </button>
+        <h1 className="cl-text">or</h1>
+        <GoogleOAuthProvider clientId="449905501322-kdoojod5l6skjl6v7n3l56i46umjkbtc.apps.googleusercontent.com">
+          <SignInWithGoogle />
+        </GoogleOAuthProvider>
       </div>
       <div className={enteredUsername ? "hstack" : "hide"}>
         <h1 className="cl-text">
