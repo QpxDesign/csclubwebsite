@@ -16,7 +16,8 @@ import {
 } from "react-icons/ai";
 
 export default function HomePage() {
-  const [authed, setAuthed] = useState(false);
+  const [authedHigh, setAuthedHigh] = useState(false);
+  const [authedMed, setAuthedMed] = useState(false);
   const [showCardEditor, setShowCardEditor] = useState(false);
   const [activeEditID, setActiveEditID] = useState("");
 
@@ -90,7 +91,8 @@ export default function HomePage() {
     })
       .then((r) => r.json())
       .then((r2) => {
-        setAuthed(r2.auth);
+        setAuthedHigh(r2.authStatus === "high");
+        setAuthedMed(r2.authStatus === "med");
       });
   }, []);
   useEffect(() => {
@@ -190,7 +192,10 @@ export default function HomePage() {
         </header>
         <AiFillPlusCircle
           className={
-            authed && viewmode !== "Deploy" ? "new-post-button" : "hidden"
+            (authedHigh || (viewmode === "Cool Stuff" && authedMed)) &&
+            viewmode !== "Deploy"
+              ? "new-post-button"
+              : "hidden"
           }
           role="button"
           onClick={() => {
@@ -210,7 +215,6 @@ export default function HomePage() {
             transition: ".3s",
           }}
         />
-        <div className={authed ? "edit-button" : "hidden"}></div>
         <div
           className="view-selector hstack"
           style={{
@@ -284,7 +288,7 @@ export default function HomePage() {
                         >
                           <AiFillDelete
                             onClick={() => handleCardDelete(item.card_id)}
-                            className={authed ? "" : "hidden"}
+                            className={authedHigh ? "" : "hidden"}
                             style={{
                               fontSize: "2em",
                               color: "red",
@@ -292,7 +296,7 @@ export default function HomePage() {
                             }}
                           />
                           <AiTwotoneEdit
-                            className={authed ? "" : "hidden"}
+                            className={authedHigh ? "" : "hidden"}
                             onClick={() => {
                               setActiveEditID(item.card_id);
                               enablePopup();
@@ -383,7 +387,12 @@ export default function HomePage() {
                           window.location.reload();
                         });
                       }}
-                      className={authed ? "" : "hidden"}
+                      className={
+                        authedHigh ||
+                        localStorage.getItem("username") === item.author
+                          ? ""
+                          : "hidden"
+                      }
                       style={{
                         fontSize: "2em",
                         color: "red",
@@ -391,7 +400,12 @@ export default function HomePage() {
                       }}
                     />{" "}
                     <AiTwotoneEdit
-                      className={authed ? "" : "hidden"}
+                      className={
+                        authedHigh ||
+                        localStorage.getItem("username") === item.author
+                          ? ""
+                          : "hidden"
+                      }
                       onClick={() => {
                         setActiveEditID(item.post_id);
                         enablePopup();
