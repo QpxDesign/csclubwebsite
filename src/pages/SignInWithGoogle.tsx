@@ -53,6 +53,7 @@ export default function SignInWithGoogle() {
           alignItems: "center",
           gap: ".5em",
           padding: ".25em .5em",
+          whiteSpace: "nowrap",
         }}
       >
         <img

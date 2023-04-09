@@ -70,7 +70,7 @@ export default function CommandLineItem(props: any) {
   if (props.type !== "Input") return <h1 className="cl-text">{props.text}</h1>;
   return (
     <>
-      <div className="hstack">
+      <div className="hstack" style={{ flexWrap: "wrap" }}>
         <h1 className="cl-text">{props.inputTitle}</h1>
         <input
           readOnly={enteredUsername}
