@@ -329,7 +329,7 @@ li {
   border-radius: 1em;
 }
 .post {
-  font-size: .9em;
+  font-size: 0.9em;
   background-color: white;
   display: flex;
   flex-direction: column;
@@ -433,26 +433,28 @@ a:hover {
   display: flex;
   flex-direction: column;
   gap: 1em;
+  max-width: 100%;
+  align-items: center;
+  justify-content: center;
 }
 .create-website-wrapper input {
-  font-size: 1.5em;
+  font-size: 1.6em;
   font-family: "Source Serif Pro";
-  padding-left: 0.75em;
+
   padding-right: 3em;
-  border-radius: 1em;
   border: none;
 }
 .create-website-wrapper button {
   font-family: "Source Serif Pro";
-  font-size: 1.65em;
+  font-size: 1.85em;
   width: fit-content;
   padding: none;
   font-weight: 700;
   border: none;
   color: white;
   padding: 0em 1em;
-  margin-left: auto;
-  background-color: #f87171;
+  margin: 0 auto;
+  background-color: #c084fc;
   border-radius: 1em;
 }
 .create-website-wrapper label {
@@ -465,4 +467,11 @@ a:hover {
   to {
     transform: rotate(360deg);
   }
+}
+input[type="file"]::file-selector-button {
+  font-family: source-serif-pro, serif !important;
+  border: none;
+  padding: 0em 1em;
+  margin-right: 0.5em;
+  margin-left: none;
 }

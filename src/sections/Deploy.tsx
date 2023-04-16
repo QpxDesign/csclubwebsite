@@ -15,7 +15,9 @@ export default function Deploy() {
   const [res, setRes]: any = useState({});
   const [userSites, setUserSites]: any = useState([]);
   const [error, setError] = useState(false);
-  const [doneUpdating, setDoneUpdating] = useState(false)
+  const [doneUpdating, setDoneUpdating] = useState(false);
+  const [files, setFiles]: any = useState([]);
+
   function getSites() {
     var data = {
       username: localStorage.getItem("username"),
@@ -36,18 +38,68 @@ export default function Deploy() {
     console.log(data);
   }
   useEffect(() => {
-    getSites()
+    getSites();
   }, []);
   return !loaded ? (
     <>
       <h1 style={{ fontSize: "1.75em" }}>Create a Website</h1>
       <div className="create-website-wrapper">
-        <input
-          placeholder="github repo link"
-          value={githubLink}
-          onChange={(e) => setGithubLink(e.target.value)}
-        ></input>
-        <div style={{ display: "flex", gap: "1em" }}>
+        <div
+          className="hstack"
+          style={{
+            justifyContent: "center",
+            alignContent: "center",
+            alignItems: "center",
+            maxWidth: "90%",
+          }}
+        >
+          <input
+            placeholder="github repo link"
+            value={githubLink}
+            type="url"
+            onChange={(e) => setGithubLink(e.target.value)}
+            style={{
+              paddingLeft: ".75em",
+              borderRadius: "1em",
+              padding: ".125em .8em",
+            }}
+          ></input>
+        </div>
+        <h2 style={{ margin: 0 }}>or</h2>
+        <div
+          className="hstack"
+          style={{
+            justifyContent: "center",
+            alignContent: "center",
+            alignItems: "center",
+            maxWidth: "90%",
+            gap: 0,
+          }}
+        >
+          <label
+            className={
+              (files[0]?.webkitRelativePath?.split("/")[0] || "") === ""
+                ? "hidden"
+                : ""
+            }
+            style={{ marginRight: "1em", textAlign: "right" }}
+          >
+            {files[0]?.webkitRelativePath?.split("/")[0] || ""}
+          </label>
+          <input
+            placeholder="drag folder"
+            type="file"
+            directory=""
+            webkitdirectory="true"
+            multiple={true}
+            onChange={(e) => {
+              setFiles(e.target.files);
+              console.log(e.target.files);
+            }}
+            style={{ margin: 0, padding: "0" }}
+          />
+        </div>
+        <div style={{ display: "flex", gap: "1em", justifyContent: "center" }}>
           <div>
             <label>HTML</label>
             <input
@@ -67,29 +119,63 @@ export default function Deploy() {
         </div>
         <button
           onClick={() => {
-            if (framework !== "" && validateGithubLink(githubLink)) {
-              var data = {
-                token: localStorage.getItem("token"),
-                username: localStorage.getItem("username"),
-                github_link: githubLink,
-                framework: framework,
-              };
-              fetch("https://api.csclub.social/handle-deploy", {
-                method: "POST",
-                headers: {
-                  "Content-Type": "application/json",
-                  "Access-Control-Allow-Origin": "*",
-                },
-                body: JSON.stringify(data),
-              })
-                .then((r) => r.json())
-                .then((r: any) => {
-                  setRes(r);
-                  setError(r.error);
+            if (
+              framework !== "" &&
+              (validateGithubLink(githubLink) ||
+                validateFolder(files, framework))
+            ) {
+              if (files.length !== 0) {
+                const formData = new FormData();
 
-                  setLoaded(true);
-                  console.log(r);
-                });
+                formData.append("files", files);
+                formData.append("mode", "files");
+                formData.append("token", String(localStorage.getItem("token")));
+                formData.append(
+                  "username",
+                  String(localStorage.getItem("username"))
+                );
+                formData.append("framework", framework);
+                fetch("https://api.csclub.social/handle-deploy", {
+                  method: "POST",
+                  headers: {
+                    "Content-Type": "application/json",
+                    "Access-Control-Allow-Origin": "*",
+                  },
+                  body: formData,
+                })
+                  .then((r) => r.json())
+                  .then((r: any) => {
+                    setRes(r);
+                    setError(r.error);
+
+                    setLoaded(true);
+                    console.log(r);
+                  });
+              } else {
+                let data = {
+                  mode: "github",
+                  token: localStorage.getItem("token"),
+                  username: localStorage.getItem("username"),
+                  github_link: githubLink,
+                  framework: framework,
+                };
+                fetch("https://api.csclub.social/handle-deploy", {
+                  method: "POST",
+                  headers: {
+                    "Content-Type": "application/json",
+                    "Access-Control-Allow-Origin": "*",
+                  },
+                  body: JSON.stringify(data),
+                })
+                  .then((r) => r.json())
+                  .then((r: any) => {
+                    setRes(r);
+                    setError(r.error);
+
+                    setLoaded(true);
+                    console.log(r);
+                  });
+              }
             } else {
               alert("Please fill out all fields bozo");
             }
@@ -106,9 +192,10 @@ export default function Deploy() {
           flexDirection: "column",
         }}
       >
-        {userSites.map((item: any) => {
+        {userSites.map((item: any, index: any) => {
           return (
             <div
+              key={index}
               style={{
                 width: "min(85%,30em)",
                 overflowX: "scroll",
@@ -179,10 +266,12 @@ export default function Deploy() {
                     marginLeft: ".5em",
                     color: "white",
                     cursor: "pointer",
-                    animation: !doneUpdating ? "rotate-forever infinite 1s1" : "",
+                    animation: !doneUpdating
+                      ? "rotate-forever infinite 1s"
+                      : "",
                   }}
                   onClick={() => {
-                    setDoneUpdating(false)
+                    setDoneUpdating(false);
                     var data = {
                       token: localStorage.getItem("token"),
                       username: localStorage.getItem("username"),
@@ -201,12 +290,11 @@ export default function Deploy() {
                       .then((r) => r.json())
                       .then((r) => {
                         console.log(r);
-                        setDoneUpdating(true)
+                        setDoneUpdating(true);
                         if (!r.error) {
-                         
-                          getSites()
+                          getSites();
                         } else {
-                          alert(r.msg)
+                          alert(r.msg);
                         }
                       });
                   }}
@@ -253,7 +341,40 @@ export default function Deploy() {
 }
 
 function validateGithubLink(l: any) {
-  const url = new URL(l);
-  if (url.hostname === "github.com") return true;
-  return false;
+  try {
+    const url = new URL(l);
+    if (url.hostname === "github.com") return true;
+    return false;
+  } catch {
+    return false;
+  }
+}
+
+function validateFolder(folder: any, framework: any) {
+  if (folder.length === 0) {
+    return;
+  }
+  var sizeSum = 0;
+  var containsIndexHTML = false;
+  for (const element of folder) {
+    sizeSum += element.size;
+    if (element.name === "index.html") {
+      containsIndexHTML = true;
+    }
+  }
+  var sizeSumMB = sizeSum / 1024 / 1024;
+  if (framework === "HTML" && !containsIndexHTML) {
+    alert("Invalid HTML");
+    return false;
+  }
+
+  return sizeSumMB < 500;
+}
+
+declare module "react" {
+  interface HTMLAttributes<T> extends AriaAttributes, DOMAttributes<T> {
+    // extends React's HTMLAttributes
+    directory?: string;
+    webkitdirectory?: string;
+  }
 }
