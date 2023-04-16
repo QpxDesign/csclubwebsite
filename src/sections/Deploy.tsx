@@ -15,7 +15,7 @@ export default function Deploy() {
   const [res, setRes]: any = useState({});
   const [userSites, setUserSites]: any = useState([]);
   const [error, setError] = useState(false);
-  const [doneUpdating, setDoneUpdating] = useState(false);
+  const [doneUpdating, setDoneUpdating] = useState(true);
   const [files, setFiles]: any = useState([]);
 
   function getSites() {
@@ -124,21 +124,25 @@ export default function Deploy() {
               (validateGithubLink(githubLink) ||
                 validateFolder(files, framework))
             ) {
-              if (files.length !== 0) {
+              if (files.Length !== 0) {
                 const formData = new FormData();
+                for (const a of files) {
+                  formData.append("file", a);
+                }
 
-                formData.append("files", files);
-                formData.append("mode", "files");
                 formData.append("token", String(localStorage.getItem("token")));
                 formData.append(
                   "username",
                   String(localStorage.getItem("username"))
                 );
+                formData.append(
+                  "folder_name",
+                  files[0]?.webkitRelativePath?.split("/")[0]
+                );
                 formData.append("framework", framework);
-                fetch("https://api.csclub.social/handle-deploy", {
+                fetch("https://api.csclub.social/handle-upload", {
                   method: "POST",
                   headers: {
-                    "Content-Type": "application/json",
                     "Access-Control-Allow-Origin": "*",
                   },
                   body: formData,
@@ -153,7 +157,6 @@ export default function Deploy() {
                   });
               } else {
                 let data = {
-                  mode: "github",
                   token: localStorage.getItem("token"),
                   username: localStorage.getItem("username"),
                   github_link: githubLink,
@@ -204,6 +207,7 @@ export default function Deploy() {
                 borderRadius: "1em",
                 marginTop: "1em",
                 position: "relative",
+                overflow: "hidden",
               }}
             >
               <h1 style={{ fontSize: "1.5em" }}>{item.domain_name}</h1>
@@ -319,7 +323,7 @@ export default function Deploy() {
         {" "}
         Website Deployed. Find it at{" "}
         <a href={"http://" + res.domain_name.split("_")[0]}>
-          {res.domain_name.split("_")[0]}{" "}
+          {res.domain_name}{" "}
         </a>
       </h1>
     </>

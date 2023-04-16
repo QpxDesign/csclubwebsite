@@ -98,6 +98,9 @@ export default function HomePage() {
         console.log(r2);
         setAuthedHigh(r2.authStatus === "high");
         setAuthedMed(r2.authStatus === "med");
+        if (r2.authStatus === "") {
+          localStorage.clear();
+        }
       });
   }, []);
   useEffect(() => {
