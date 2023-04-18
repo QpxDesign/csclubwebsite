@@ -15,9 +15,9 @@ export default function Deploy() {
   const [res, setRes]: any = useState({});
   const [userSites, setUserSites]: any = useState([]);
   const [error, setError] = useState(false);
-  const [doneUpdating, setDoneUpdating] = useState(true);
+  const [doneUpdating, setDoneUpdating] = useState(false);
   const [files, setFiles]: any = useState([]);
-
+  const [loadingFiles, setLoadingFiles]: any = useState(false);
   function getSites() {
     var data = {
       username: localStorage.getItem("username"),
@@ -125,6 +125,7 @@ export default function Deploy() {
                 validateFolder(files, framework))
             ) {
               if (files.Length !== 0) {
+                setLoadingFiles(true);
                 const formData = new FormData();
                 for (const a of files) {
                   formData.append("file", a);
@@ -153,6 +154,7 @@ export default function Deploy() {
                     setError(r.error);
 
                     setLoaded(true);
+                    setLoadingFiles(false);
                     console.log(r);
                   });
               } else {
@@ -186,6 +188,13 @@ export default function Deploy() {
         >
           GO
         </button>
+        <GrUpdate
+          style={{
+            fontSize: "2em",
+            fill: "white",
+            animation: loadingFiles ? "rotate-forever infinite 2s" : "",
+          }}
+        />
       </div>
       <div
         style={{
@@ -323,7 +332,7 @@ export default function Deploy() {
         {" "}
         Website Deployed. Find it at{" "}
         <a href={"http://" + res.domain_name.split("_")[0]}>
-          {res.domain_name}{" "}
+          {res.domain_name.split("_")[0]}{" "}
         </a>
       </h1>
     </>
