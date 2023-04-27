@@ -61,13 +61,12 @@ export default function Competition() {
           >
             Details
           </h2>
-          <div style={{ width: "90%" }}>
+          <div style={{ width: "90%", maxWidth: "100%" }}>
             <h3
               style={{
                 fontSize: "1.75em",
                 marginRight: "auto",
                 marginBottom: ".5em",
-                minWidth: "20em",
               }}
             >
               Your submission will be judged on the following categories:
@@ -77,7 +76,6 @@ export default function Competition() {
                 fontSize: "1.5em",
                 marginLeft: "auto",
                 marginBottom: ".5em",
-                textAlign: "right",
               }}
             >
               Creativity - how unique your creation is
