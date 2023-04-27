@@ -8,12 +8,14 @@ import {
   Route,
 } from "react-router-dom";
 import React from "react";
+import Competition from "./pages/Competition";
 function App() {
   return (
     <Router>
       <Routes>
         <Route path="/" element={<HomePage />} />{" "}
         <Route path="/blog/post/:id" element={<BlogPost />} />
+        <Route path="/comp" element={<Competition />} />
       </Routes>
     </Router>
   );
