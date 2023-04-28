@@ -61,7 +61,7 @@ export default function Competition() {
           >
             Details
           </h2>
-          <div style={{ width: "90%", maxWidth: "100%" }}>
+          <div style={{ width: "90%", maxWidth: "100%",minWidth:"min(30em,90vw)" }}>
             <h3
               style={{
                 fontSize: "1.75em",
