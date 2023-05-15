@@ -121,10 +121,10 @@ export default function Competition() {
               what are the deadlines and how do i submit my project?
             </h3>
             <h3 className="ans">
-              You must have your project submitted by XXX. If it's a website
+              You must have your project submitted by May 26th. If it's a website
               that runs plain HTML/CSS/JS or React.js (no PHP), you can use our
               Deploy (visit our home page and create an account if you haven't
-              already) Feature to host it. If not, just email it to a club head.
+              already) Feature to host it. If not, just email it to a club head (George, Nico, Quinn, and last but still least, Iain)
             </h3>
             <h3 className="question">how will you pick the winners?</h3>
             <h3 className="ans">
@@ -133,8 +133,8 @@ export default function Competition() {
               will take into account your participation in the club this year as
               well as how high your project scored.
             </h3>
-            <h3 className="question">where are the bodies?</h3>
-            <h3 className="ans">no comment.</h3>
+            <h3 className="question">questions?</h3>
+            <h3 className="ans">feel free to email a head with any questions or comments you have.</h3>
           </div>
         </div>
       </div>
