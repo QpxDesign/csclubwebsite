@@ -14,6 +14,7 @@ import {
   AiFillDelete,
   AiTwotoneEdit,
 } from "react-icons/ai";
+import ContactForm from "../components/ContactForm";
 
 export default function HomePage() {
   const [authedHigh, setAuthedHigh] = useState(false);
@@ -269,6 +270,20 @@ export default function HomePage() {
           >
             Deploy
           </div>
+              <div
+            style={{
+              borderLeft: "3px solid white",
+              height: "2em",
+            }}
+          ></div>
+              <div
+            onClick={() => {
+              setViewmode("Contact");
+            }}
+            className={viewmode === "Contact" ? "option active" : "option"}
+          >
+            Contact
+          </div>
         </div>
 
         {viewmode === "About the Club" ? (
@@ -330,6 +345,7 @@ export default function HomePage() {
                 </div>
               );
             })}{" "}
+
           </div>
         ) : viewmode === "Cool Stuff" ? (
           <div
@@ -432,7 +448,8 @@ export default function HomePage() {
           </div>
         ) : viewmode === "Deploy" ? (
           <Deploy />
-        ) : null}
+        ) : viewmode === "Contact"  ? (<ContactForm/> ):
+         null }
 
         <h5 style={{ fontSize: "1.25em" }}>version 0.17</h5>
       </section>
