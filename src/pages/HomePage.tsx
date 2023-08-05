@@ -15,6 +15,7 @@ import {
   AiTwotoneEdit,
 } from "react-icons/ai";
 import ContactForm from "../components/ContactForm";
+import MinecraftCard from "../components/MinecraftCard";
 
 interface HomePageProps {
   defaultViewMode: String;
@@ -296,7 +297,7 @@ export default function HomePage(props: HomePageProps) {
 
         {viewmode === "About the Club" ? (
           <div className="card-wrapper">
-            {cardChunks.map((item0: any) => {
+            {cardChunks.map((item0: any, index: any) => {
               return (
                 <div className="col" key={uuid()}>
                   {item0.map((item: any) => {
@@ -350,6 +351,11 @@ export default function HomePage(props: HomePageProps) {
                       </div>
                     );
                   })}
+                  {index === cardChunks.length - 1 ? (
+                    <MinecraftCard properAuth={authedHigh || authedMed} />
+                  ) : (
+                    ""
+                  )}
                 </div>
               );
             })}{" "}

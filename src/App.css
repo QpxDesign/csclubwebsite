@@ -166,7 +166,7 @@ section header {
   flex-wrap: wrap;
   margin-top: 1.5em;
   max-width: fit-content !important;
-  justify-content: center;
+  justify-content: flex-start;
   margin-left: auto;
   margin-right: auto;
 }
@@ -175,11 +175,11 @@ section header {
   flex-direction: column;
   gap: 1em 0;
   width: 30vw;
-  align-items: center;
   min-width: min(97%, 400px);
+  max-height: fit-content !important;
 }
 
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 1000px) {
   .card-wrapper {
     width: 97%;
     justify-content: center;
@@ -327,6 +327,7 @@ li {
 .view-selector {
   margin-top: 1em;
   border-top: none;
+  max-width: 90%;
 }
 .option.active {
   background-color: white;
@@ -443,7 +444,9 @@ a:hover {
   align-items: center;
   justify-content: center;
 }
-.create-website-wrapper input,.contact-form-wrapper input,.contact-form-wrapper textarea {
+.create-website-wrapper input,
+.contact-form-wrapper input,
+.contact-form-wrapper textarea {
   font-size: 1.6em;
   font-family: "Source Serif Pro";
   padding-right: 3em;
@@ -544,4 +547,13 @@ input[type="file"]::file-selector-button {
   border-radius: 0.25em;
   margin: 0 auto;
   margin-top: 0.5em;
+}
+.basic-button-1 {
+  font-family: "Source Serif Pro";
+  font-size: 1.1em;
+  margin-left: 0.5em;
+  padding: 0.25em 0.75em;
+}
+.basic-button-1:hover {
+  background-color: #cbd5e1;
 }

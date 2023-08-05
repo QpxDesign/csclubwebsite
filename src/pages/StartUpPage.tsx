@@ -24,28 +24,32 @@ export default function StartUpPage() {
   });
   return (
     <div className="terminal-wrapper" onClick={() => setSkipAnimation(true)}>
-      <button style={{
-        position:'absolute',
-        zIndex:1000,
-        left: 0,
-        right: 0, 
-        marginLeft: "auto", 
-        marginRight: "auto",
-        width: "8em",
-        border:'none',
-        background:"rgba(255,255,255,.8)",
-        fontFamily: "Source-Serif-Pro",
-        fontWeight:800,
-        fontSize:"1.5em",
-        borderRadius:".25em"
-      }}>Tap To Skip</button>
+      <button
+        style={{
+          position: "absolute",
+          zIndex: 1000,
+          left: 0,
+          right: 0,
+          marginLeft: "auto",
+          marginRight: "auto",
+          width: "8em",
+          border: "none",
+          background: "rgba(255,255,255,.8)",
+          fontFamily: "Source-Serif-Pro",
+          fontWeight: 800,
+          fontSize: "1.5em",
+          borderRadius: ".25em",
+        }}
+      >
+        Tap To Skip
+      </button>
       {Array.isArray(StartupLineArray)
         ? StartupLineArray.map((line, index) => {
             return <CommandLineItem text={line} key={index} />;
           })
         : null}
       {StartupLineArray.length === StartupLines.length ? (
-        <CommandLineItem type={"Input"} inputTitle={"username:"} />
+        <CommandLineItem type={"Input"} inputTitle={"email:"} />
       ) : null}
     </div>
   );
