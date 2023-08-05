@@ -16,7 +16,11 @@ import {
 } from "react-icons/ai";
 import ContactForm from "../components/ContactForm";
 
-export default function HomePage() {
+interface HomePageProps {
+  defaultViewMode: String;
+}
+
+export default function HomePage(props: HomePageProps) {
   const [authedHigh, setAuthedHigh] = useState(false);
   const [authedMed, setAuthedMed] = useState(false);
   const [showCardEditor, setShowCardEditor] = useState(false);
@@ -26,7 +30,7 @@ export default function HomePage() {
   const [cardChunks, setCardChunks] = useState([[], []]);
   const [cardDataLoaded, setCardDataLoaded] = useState(false);
 
-  const [viewmode, setViewmode] = useState("About the Club");
+  const [viewmode, setViewmode] = useState(props.defaultViewMode);
 
   const [blogData, setBlogData]: any = useState([]);
 
@@ -233,6 +237,7 @@ export default function HomePage() {
         >
           <div
             onClick={() => {
+              window.location.pathname = "/";
               setViewmode("About the Club");
             }}
             className={
@@ -250,6 +255,7 @@ export default function HomePage() {
 
           <div
             onClick={() => {
+              window.location.pathname = "/cool-stuff";
               setViewmode("Cool Stuff");
             }}
             className={viewmode === "Cool Stuff" ? "option active" : "option"}
@@ -264,20 +270,22 @@ export default function HomePage() {
           ></div>
           <div
             onClick={() => {
+              window.location.pathname = "/deploy";
               setViewmode("Deploy");
             }}
             className={viewmode === "Deploy" ? "option active" : "option"}
           >
             Deploy
           </div>
-              <div
+          <div
             style={{
               borderLeft: "3px solid white",
               height: "2em",
             }}
           ></div>
-              <div
+          <div
             onClick={() => {
+              window.location.pathname = "/contact";
               setViewmode("Contact");
             }}
             className={viewmode === "Contact" ? "option active" : "option"}
@@ -345,7 +353,6 @@ export default function HomePage() {
                 </div>
               );
             })}{" "}
-
           </div>
         ) : viewmode === "Cool Stuff" ? (
           <div
@@ -448,8 +455,9 @@ export default function HomePage() {
           </div>
         ) : viewmode === "Deploy" ? (
           <Deploy />
-        ) : viewmode === "Contact"  ? (<ContactForm/> ):
-         null }
+        ) : viewmode === "Contact" ? (
+          <ContactForm />
+        ) : null}
 
         <h5 style={{ fontSize: "1.25em" }}>version 0.17</h5>
       </section>
