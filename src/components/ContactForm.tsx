@@ -46,6 +46,8 @@ export default function ContactForm() {
         display: "flex",
         flexDirection: "column",
         gap: "1em",
+        maxWidth:"90%",
+        overflow:"hidden"
       }}
     >
       <input
