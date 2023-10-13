@@ -142,7 +142,7 @@ export default function Deploy() {
                   files[0]?.webkitRelativePath?.split("/")[0]
                 );
                 formData.append("framework", framework);
-                fetch("http://192.168.1.159:4201/handle-upload", {
+                fetch("https://api.csclub.social/handle-upload", {
                   method: "POST",
                   headers: {
                     "Access-Control-Allow-Origin": "*",
@@ -166,7 +166,7 @@ export default function Deploy() {
                   framework: framework,
                 };
                 setLoadingFiles(true)
-                fetch("http://192.168.1.159:4201/handle-deploy", {
+                fetch("https://api.csclub.social/handle-deploy", {
                   method: "POST",
                   headers: {
                     "Content-Type": "application/json",
@@ -260,7 +260,7 @@ export default function Deploy() {
                       domain_name: item.domain_name,
                     };
                     console.log(data);
-                    fetch("http://192.168.1.159:4201/delete-site", {
+                    fetch("https://api.csclub.social/delete-site", {
                       method: "POST",
                       headers: {
                         "Content-Type": "application/json",
