@@ -124,7 +124,8 @@ export default function Deploy() {
               (validateGithubLink(githubLink) ||
                 validateFolder(files, framework))
             ) {
-              if (files.Length !== 0) {
+              console.log(files.length)
+              if (files.length !== 0) {
                 setLoadingFiles(true);
                 const formData = new FormData();
                 for (const a of files) {
@@ -141,7 +142,7 @@ export default function Deploy() {
                   files[0]?.webkitRelativePath?.split("/")[0]
                 );
                 formData.append("framework", framework);
-                fetch("https://api.csclub.social/handle-upload", {
+                fetch("http://192.168.1.159:4201/handle-upload", {
                   method: "POST",
                   headers: {
                     "Access-Control-Allow-Origin": "*",
@@ -164,7 +165,8 @@ export default function Deploy() {
                   github_link: githubLink,
                   framework: framework,
                 };
-                fetch("https://api.csclub.social/handle-deploy", {
+                setLoadingFiles(true)
+                fetch("http://192.168.1.159:4201/handle-deploy", {
                   method: "POST",
                   headers: {
                     "Content-Type": "application/json",
@@ -176,7 +178,7 @@ export default function Deploy() {
                   .then((r: any) => {
                     setRes(r);
                     setError(r.error);
-
+                    setLoadingFiles(false);
                     setLoaded(true);
                     console.log(r);
                   });
@@ -258,7 +260,7 @@ export default function Deploy() {
                       domain_name: item.domain_name,
                     };
                     console.log(data);
-                    fetch("https://api.csclub.social/delete-site", {
+                    fetch("http://192.168.1.159:4201/delete-site", {
                       method: "POST",
                       headers: {
                         "Content-Type": "application/json",
