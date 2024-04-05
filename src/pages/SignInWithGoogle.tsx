@@ -6,6 +6,7 @@ import {
 } from "@react-oauth/google";
 
 import axios from "axios";
+import GoogleLogo from "../assets/Google__G__logo.svg"
 
 export default function SignInWithGoogle() {
   const [tokenResponse, setTokenResponse] = useState<TokenResponse | null>();
@@ -58,8 +59,8 @@ export default function SignInWithGoogle() {
       >
         <img
           src={
-            "https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg"
-          }
+            GoogleLogo
+            }
           style={{ objectFit: "contain", height: "1.25em" }}
         />
         Login with Google
