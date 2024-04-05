@@ -25,7 +25,7 @@ export default function ContactForm() {
       CustomAlert("Body Too Short.", "", "close");
       return;
     }
-    await fetch("https://api.csclub.social/contact", {
+    await fetch("https://csclub-api.quinnpatwardhan.com/contact", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

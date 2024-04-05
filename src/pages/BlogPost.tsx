@@ -10,7 +10,7 @@ export default function BlogPost() {
   const [loaded, setLoaded]: any = useState(false);
   const [postData, setPostData]: any = useState({});
   async function FetchPosts() {
-    await fetch("https://api.csclub.social/get-blog-posts")
+    await fetch("https://csclub-api.quinnpatwardhan.com/get-blog-posts")
       .then((res) => res.json())
       .then((r) => {
         setRes(r);

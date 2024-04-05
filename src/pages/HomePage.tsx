@@ -59,7 +59,7 @@ export default function HomePage(props: HomePageProps) {
       username: localStorage.getItem("username"),
       card_id: card_id,
     };
-    fetch("https://api.csclub.social/delete-card", {
+    fetch("https://csclub-api.quinnpatwardhan.com/delete-card", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -71,7 +71,7 @@ export default function HomePage(props: HomePageProps) {
     });
   }
   useEffect(() => {
-    fetch("https://api.csclub.social/get-blog-posts")
+    fetch("https://csclub-api.quinnpatwardhan.com/get-blog-posts")
       .then((r) => r.json())
       .then((r) => {
         var byDate = r.slice(0);
@@ -80,7 +80,7 @@ export default function HomePage(props: HomePageProps) {
         });
         setBlogData(byDate);
       });
-    fetch("https://api.csclub.social/get-cards")
+    fetch("https://csclub-api.quinnpatwardhan.com/get-cards")
       .then((r) => r.json())
       .then((r2) => {
         setCardData([...r2]);
@@ -91,7 +91,7 @@ export default function HomePage(props: HomePageProps) {
       token: localStorage.getItem("token"),
       username: localStorage.getItem("username"),
     };
-    fetch("https://api.csclub.social/validate-token", {
+    fetch("https://csclub-api.quinnpatwardhan.com/validate-token", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -413,7 +413,7 @@ export default function HomePage(props: HomePageProps) {
                           token: localStorage.getItem("token"),
                           username: localStorage.getItem("username"),
                         };
-                        fetch("https://api.csclub.social/delete-blog-post", {
+                        fetch("https://csclub-api.quinnpatwardhan.com/delete-blog-post", {
                           method: "POST",
                           headers: {
                             "Content-Type": "application/json",

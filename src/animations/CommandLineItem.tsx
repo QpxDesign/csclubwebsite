@@ -16,7 +16,7 @@ export default function CommandLineItem(props: any) {
       username: username,
     };
     fetch(
-      `https://api.csclub.social/${userAlreadyExists ? "login" : "signup"}`,
+      `https://csclub-api.quinnpatwardhan.com/${userAlreadyExists ? "login" : "signup"}`,
       {
         method: "POST",
         headers: {
@@ -46,7 +46,7 @@ export default function CommandLineItem(props: any) {
     var data = {
       username: username,
     };
-    await fetch("https://api.csclub.social/get-username-status", {
+    await fetch("https://csclub-api.quinnpatwardhan.com/get-username-status", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

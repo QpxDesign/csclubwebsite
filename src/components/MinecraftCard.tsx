@@ -13,7 +13,7 @@ export default function MinecraftCard(props: MinecraftCardProps) {
       username: localStorage.getItem("username"),
       mc_username: minecraftIGN,
     };
-    await fetch("https://api.csclub.social/whitelist-mc-username", {
+    await fetch("https://csclub-api.quinnpatwardhan.com/whitelist-mc-username", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -44,7 +44,7 @@ export default function MinecraftCard(props: MinecraftCardProps) {
         }}
       ></div>
       <h1>Minecraft Server</h1>
-      <h2>mc.csclub.social | 1.20.1 vanilla</h2>
+      <h2>mc.csclub.quinnpatwardhan.com | 1.20.1 vanilla</h2>
       <div
         style={{
           justifyContent: "center",

@@ -131,7 +131,7 @@ export default function PostEditor(props: PostEditorProps) {
               card_id: props.id,
             };
             fetch(
-              `https://api.csclub.social/${
+              `https://csclub-api.quinnpatwardhan.com/${
                 props.inCreateMode ? "add-card" : "update-cards"
               }`,
               {
@@ -159,7 +159,7 @@ export default function PostEditor(props: PostEditorProps) {
               post_id: props.id,
             };
             fetch(
-              `https://api.csclub.social/${
+              `https://csclub-api.quinnpatwardhan.com/${
                 props.inCreateMode ? "create-blog-post" : "edit-blog-post"
               }`,
               {

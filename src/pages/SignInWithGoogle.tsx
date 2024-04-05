@@ -17,7 +17,7 @@ export default function SignInWithGoogle() {
       var data = {
         code: codeResponse.code,
       };
-      const tokens = await fetch("https://api.csclub.social/auth/google", {
+      const tokens = await fetch("https://csclub-api.quinnpatwardhan.com/auth/google", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

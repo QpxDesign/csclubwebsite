@@ -22,7 +22,7 @@ export default function Deploy() {
     var data = {
       username: localStorage.getItem("username"),
     };
-    fetch("https://api.csclub.social/get-user-sites", {
+    fetch("https://csclub-api.quinnpatwardhan.com/get-user-sites", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -142,7 +142,7 @@ export default function Deploy() {
                   files[0]?.webkitRelativePath?.split("/")[0]
                 );
                 formData.append("framework", framework);
-                fetch("https://api.csclub.social/handle-upload", {
+                fetch("https://csclub-api.quinnpatwardhan.com/handle-upload", {
                   method: "POST",
                   headers: {
                     "Access-Control-Allow-Origin": "*",
@@ -166,7 +166,7 @@ export default function Deploy() {
                   framework: framework,
                 };
                 setLoadingFiles(true)
-                fetch("https://api.csclub.social/handle-deploy", {
+                fetch("https://csclub-api.quinnpatwardhan.com/handle-deploy", {
                   method: "POST",
                   headers: {
                     "Content-Type": "application/json",
@@ -228,7 +228,7 @@ export default function Deploy() {
               <h3 style={{ textAlign: "left", justifyContent: "flex-start" }}>
                 Last Updated: {FormatTime(item.last_updated)}
               </h3>
-              <a href={"http://" + item.domain_name + ".csclub.social"}>
+              <a href={"http://" + item.domain_name + ".csclub.quinnpatwardhan.com"}>
                 <h3
                   style={{
                     textAlign: "left",
@@ -260,7 +260,7 @@ export default function Deploy() {
                       domain_name: item.domain_name,
                     };
                     console.log(data);
-                    fetch("https://api.csclub.social/delete-site", {
+                    fetch("https://csclub-api.quinnpatwardhan.com/delete-site", {
                       method: "POST",
                       headers: {
                         "Content-Type": "application/json",
@@ -294,7 +294,7 @@ export default function Deploy() {
                       domain_name: item.domain_name,
                     };
                     console.log(data);
-                    fetch("https://api.csclub.social/update-site", {
+                    fetch("https://csclub-api.quinnpatwardhan.com/update-site", {
                       method: "POST",
                       headers: {
                         "Content-Type": "application/json",
